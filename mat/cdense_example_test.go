@@ -33,8 +33,8 @@ func ExampleCDense_Add() {
 
 	// Output:
 	//
-	// c = ⎡1+1i  1i⎤
-	//     ⎣1  3+4*1i⎦
+	// c = ⎡1+1i     1i⎤
+	//     ⎣1    3+4*1i⎦
 }
 
 func ExampleCDense_Sub() {

@@ -34,6 +34,13 @@ type CMatrix interface {
 	T() CMatrix
 }
 
+// denseMatrix represents the extra set of methods that all Dense Matrix types
+// should satisfy. This is used to enforce compile-time consistency between the
+// Dense types, especially helpful when adding new features.
+type denseCMatrix interface {
+	DiagView() CDiagonal
+}
+
 // A RawCMatrixer can return a cblas128.General representation of the receiver. Changes to the cblas128.General.Data
 // slice will be reflected in the original matrix, changes to the Rows, Cols and Stride fields will not.
 type RawCMatrixer interface {

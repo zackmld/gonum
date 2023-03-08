@@ -5,6 +5,8 @@ import (
 	"gonum.org/v1/gonum/blas/cblas128"
 )
 
+// Add adds a and b element-wise, placing the result in the receiver. Add
+// will panic if the two matrices do not have the same shape.
 func (m *CDense) Add(a, b CMatrix) {
 	ar, ac := a.Dims()
 	br, bc := b.Dims()
@@ -52,6 +54,8 @@ func (m *CDense) Add(a, b CMatrix) {
 	}
 }
 
+// Sub subtracts the matrix b from a, placing the result in the receiver. Sub
+// will panic if the two matrices do not have the same shape.
 func (m *CDense) Sub(a, b CMatrix) {
 	ar, ac := a.Dims()
 	br, bc := b.Dims()
@@ -99,6 +103,8 @@ func (m *CDense) Sub(a, b CMatrix) {
 	}
 }
 
+// Mul takes the matrix product of a and b, placing the result in the receiver.
+// If the number of columns in a does not equal the number of rows in b, Mul will panic.
 func (m *CDense) Mul(a, b CMatrix) {
 
 	ar, ac := a.Dims()
@@ -147,6 +153,7 @@ func (m *CDense) Mul(a, b CMatrix) {
 	}
 }
 
+// Scale multiplies the elements of a by f, placing the result in the receiver.
 func (m *CDense) Scale(f complex128, a CMatrix) {
 	ar, ac := a.Dims()
 

@@ -351,6 +351,37 @@ func (d *DiagDense) setDiag(i int, v float64) {
 }
 
 // At returns the element at row i, column j.
+func (d *DiagCDense) At(i, j int) complex128 {
+	if uint(i) >= uint(d.mat.N) {
+		panic(ErrRowAccess)
+	}
+	if uint(j) >= uint(d.mat.N) {
+		panic(ErrColAccess)
+	}
+	return d.at(i, j)
+}
+
+func (d *DiagCDense) at(i, j int) complex128 {
+	if i != j {
+		return 0
+	}
+	return d.mat.Data[i*d.mat.Inc]
+}
+
+// SetDiag sets the element at row i, column i to the value v.
+// It panics if the location is outside the appropriate region of the matrix.
+func (d *DiagCDense) SetDiag(i int, v complex128) {
+	if uint(i) >= uint(d.mat.N) {
+		panic(ErrRowAccess)
+	}
+	d.setDiag(i, v)
+}
+
+func (d *DiagCDense) setDiag(i int, v complex128) {
+	d.mat.Data[i*d.mat.Inc] = v
+}
+
+// At returns the element at row i, column j.
 func (a *Tridiag) At(i, j int) float64 {
 	if uint(i) >= uint(a.mat.N) {
 		panic(ErrRowAccess)

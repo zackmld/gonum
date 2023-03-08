@@ -348,6 +348,34 @@ func (d *DiagDense) setDiag(i int, v float64) {
 	d.mat.Data[i*d.mat.Inc] = v
 }
 
+func (d *DiagCDense) At(i, j int) complex128 {
+	return d.at(i, j)
+}
+
+func (d *DiagCDense) at(i, j int) complex128 {
+	if uint(i) >= uint(d.mat.N) {
+		panic(ErrRowAccess)
+	}
+	if uint(j) >= uint(d.mat.N) {
+		panic(ErrColAccess)
+	}
+	if i != j {
+		return 0
+	}
+	return d.mat.Data[i*d.mat.Inc]
+}
+
+func (d *DiagCDense) SetDiag(i int, v complex128) {
+	d.setDiag(i, v)
+}
+
+func (d *DiagCDense) setDiag(i int, v complex128) {
+	if uint(i) >= uint(d.mat.N) {
+		panic(ErrRowAccess)
+	}
+	d.mat.Data[i*d.mat.Inc] = v
+}
+
 // At returns the element at row i, column j.
 func (a *Tridiag) At(i, j int) float64 {
 	return a.at(i, j)
